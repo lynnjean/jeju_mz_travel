@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>청년층 제주 관광 동향</title>
+<style>
+:root{
+  --bg:#eef4fc; --card:#ffffff; --card-tint:#f6f9fe; --line:#dbe5f3; --line-soft:#e9eff8;
+  --ink:#0f1f3d; --ink-2:#4a5873; --ink-3:#7a869c; --accent:#1f5fd1; --accent-soft:#e3edfd;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --good:#0ca30c; --good-ink:#006300; --bad:#d03b3b; --warn-bg:#fff7e6; --warn-line:#f2c46b; --warn-ink:#7a4d00;
+  --na-bg:#f3f4f7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px;min-width:0}
+.card.tint{background:linear-gradient(180deg,#f3f8ff,#fff)}
+.h{display:flex;align-items:center;gap:10px;margin:0 0 2px}
+.num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center;font-size:14px}
+.h h2,.h h1{margin:0;font-size:18px}
+.h h1{font-size:24px}
+.sub{color:var(--ink-2);font-size:13px;margin:2px 0 0 38px}
+.basis{color:var(--ink-3);font-size:12px;margin:6px 0 0 38px}
+.basis b{color:var(--ink-2);font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 > .card{margin-bottom:0}
+.row{margin-bottom:14px}
+.grid-6-5{display:grid;grid-template-columns:1.15fr 1fr;gap:14px}
+.grid-6-5 > .card{margin-bottom:0}
+@media (max-width:900px){.grid2,.grid-6-5{grid-template-columns:1fr}}
+header .meta{margin:8px 0 0 38px;color:var(--ink-2);font-size:13px;display:grid;gap:3px}
+header .meta span.k{font-weight:700;color:var(--ink);margin-right:6px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0 0}
+.filters label{display:block;font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:4px}
+select,button{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 10px;width:100%}
+button{width:auto;cursor:pointer}
+button:hover,select:hover{border-color:#a9c0e6}
+.fnote{margin-top:10px;font-size:12px;color:var(--ink-3)}
+.kpi{display:flex;gap:16px;align-items:center;margin:12px 0 0 38px}
+.kpi .big{font-size:34px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.kpi .cap{color:var(--ink-2);font-size:13px}
+.kpi .sec{color:var(--ink-2);font-size:13px;margin-top:6px}
+.up{color:var(--good-ink)} .down{color:var(--bad)}
+.chart{width:100%;height:320px}
+.chart.tall{height:400px}
+.chart.short{height:300px}
+.chart.map{height:440px}
+@media (max-width:600px){.chart.map{height:320px}}
+.na{background:var(--na-bg);border:1px dashed #c9cfda;border-radius:10px;padding:14px;color:var(--ink-2);font-size:13px}
+.warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink);border-radius:8px;padding:8px 10px;font-size:12px;margin-top:8px}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:#1b4ea8;white-space:nowrap}
+.badge.gray{background:#eef0f4;color:var(--ink-2)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:middle}
+th{background:var(--card-tint);color:var(--ink-2);font-weight:700;font-size:12px;position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tscroll{max-height:380px;overflow:auto;border:1px solid var(--line-soft);border-radius:8px;margin-top:10px}
+.cellbar{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.cellbar i{display:block;height:8px;border-radius:4px;background:var(--s1);min-width:2px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 0}
+.toolbar select{width:auto;max-width:260px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;border-radius:0;padding:6px 12px;background:#fff}
+.seg button.on{background:var(--accent);color:#fff}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.cols4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+@media (max-width:900px){.cols3,.cols4{grid-template-columns:1fr}}
+.box{background:var(--card-tint);border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;min-width:0}
+.box h3{margin:0 0 6px;font-size:14px}
+.box ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink-2)}
+.box li{margin:3px 0}
+.box .tag{font-size:11px;color:var(--ink-3)}
+.split{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin-top:8px}
+@media (max-width:700px){.split{grid-template-columns:1fr}}
+.foot{color:var(--ink-3);font-size:12px;text-align:center;padding:8px 0 24px}
+.pill-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2)}
+</style>
+<script src="lib/echarts.min.js"></script>
+<script src="lib/echarts-wordcloud.min.js" onload="window.__wc=true" onerror="window.__wc=false"></script>
+<script src="data.js"></script>
+<script src="reviews.js" onerror="window.REVIEW_DATA=null"></script>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 1 헤더 -->
+<header class="card tint">
+  <div class="h"><span class="num">1</span><h1>청년층 제주 관광 동향</h1></div>
+  <div class="meta">
+    <div><span class="k">분석 기간</span><span id="hdrPeriod"></span></div>
+    <div><span class="k">데이터 출처</span>제주 관광 데이터 파일 7종 (연령대별 방문 · 지역별 방문객(읍면동) · 지역별 인기 장소 · 비짓제주 검색어 순위 · 월별/일별 입도 관광객 · 국가별 외국인 입도객) · 온라인 후기: <b>미제공</b></div>
+    <div><span class="k">분석 대상</span>20대 등 연령 구분은 「제주 연령대별 방문」에만 존재 → 그 외 지역·장소·검색어 데이터는 <b>전체 관광객(연령 구분 없음)</b> 특성으로 해석</div>
+  </div>
+  <details>
+    <summary>데이터별 컬럼 · 기간 · 단위 · 집계 기준 확인</summary>
+    <div class="tscroll" style="max-height:none"><table id="metaTable"></table></div>
+  </details>
+</header>
+
+<!-- 2 필터 -->
+<section class="card">
+  <div class="h"><span class="num">2</span><h2>필터 영역</h2></div>
+  <div class="filters">
+    <div><label for="fStart">기간 시작</label><select id="fStart"></select></div>
+    <div><label for="fEnd">기간 종료</label><select id="fEnd"></select></div>
+    <div><label for="fAge">연령대 (연령 데이터만 적용)</label><select id="fAge"></select></div>
+    <div><label for="fSex">성별 (연령 데이터만 적용)</label><select id="fSex"></select></div>
+    <div><label for="fSgg">지역 – 시군구</label><select id="fSgg"></select></div>
+    <div><label for="fEmd">지역 – 읍면동</label><select id="fEmd"></select></div>
+  </div>
+  <div class="toolbar"><button id="btnReset">필터 초기화</button><span class="fnote" id="filterNote"></span></div>
+</section>
+
+<!-- 3,4 KPI -->
+<div class="grid2 row">
+  <section class="card">
+    <div class="h"><span class="num">3</span><h2>핵심 지표 <span style="font-weight:500;font-size:15px" id="k1Title"></span></h2></div>
+    <div class="kpi">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="var(--s1)" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><circle cx="16.5" cy="9" r="2.6"/><path d="M2.5 19c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6v1h-13zM15 20v-1c0-1.7-.5-3.2-1.4-4.4.9-.4 1.8-.6 2.9-.6 3 0 5 2 5 4.8V20z"/></svg>
+      <div><div class="big" id="k1Val">–</div><div class="cap" id="k1Cap"></div><div class="sec" id="k1Sec"></div></div>
+    </div>
+    <div class="basis" id="k1Basis"></div>
+  </section>
+  <section class="card">
+    <div class="h"><span class="num">4</span><h2>핵심 지표 <span style="font-weight:500;font-size:15px">(전년 동월 대비 증감률)</span></h2></div>
+    <div class="kpi">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" id="k2Icon" aria-hidden="true"></svg>
+      <div><div class="big" id="k2Val">–</div><div class="cap" id="k2Cap"></div><div class="sec" id="k2Sec"></div></div>
+    </div>
+    <div class="basis" id="k2Basis"></div>
+  </section>
+</div>
+
+<!-- 5 방문 추이 -->
+<section class="card">
+  <div class="h"><span class="num">5</span><h2>방문 추이</h2></div>
+  <div class="sub" id="trendSub"></div>
+  <div id="trendBox"><div id="trendChart" class="chart"></div></div>
+  <details><summary>월별 상세 수치 표</summary><div class="tscroll"><table id="trendTable"></table></div></details>
+  <div class="basis" id="trendBasis"></div>
+</section>
+
+<!-- 6, 7 -->
+<div class="grid-6-5 row">
+  <section class="card">
+    <div class="h"><span class="num">6</span><h2>지역별 방문</h2></div>
+    <div class="sub">제주 읍면동별 방문객 수 (지도 · 상위 10) — <b>전체 방문객, 연령 구분 없음</b></div>
+    <div class="toolbar">
+      <span style="font-size:12px;color:var(--ink-2)">지표</span>
+      <div class="seg" id="regionMetric">
+        <button data-v="5" class="on">총 방문객</button><button data-v="3">내국인</button><button data-v="4">외국인</button>
+      </div>
+    </div>
+    <div id="regionBox">
+      <div id="mapChart" class="chart map"></div>
+      <div id="regionBar" class="chart" style="height:330px"></div>
+    </div>
+    <div id="regionSel"></div>
+    <details><summary>읍면동별 상세 수치 표 (43개)</summary><div class="tscroll"><table id="regionTable"></table></div></details>
+    <div class="basis" id="regionBasis"></div>
+  </section>
+
+  <section class="card">
+    <div class="h"><span class="num">7</span><h2>인기 장소</h2></div>
+    <div class="sub">장소별 관광객 도착 수 순위 — <b>전체 관광객, 연령 구분 없음</b></div>
+    <div class="toolbar">
+      <select id="placeCat" aria-label="카테고리 3단계"></select>
+      <select id="placeN" aria-label="표시 개수" style="width:auto"><option value="10">상위 10</option><option value="20">상위 20</option><option value="50">상위 50</option></select>
+    </div>
+    <div id="placeBox"><div class="tscroll" style="max-height:470px"><table id="placeTable"></table></div></div>
+    <div id="placeWarn"></div>
+    <div class="basis" id="placeBasis"></div>
+  </section>
+</div>
+
+<!-- 8, 9 -->
+<div class="grid2 row">
+  <section class="card">
+    <div class="h"><span class="num">8</span><h2>관광 검색어</h2></div>
+    <div class="sub">비짓제주 검색어(장소명) 수치 — 워드클라우드 · 막대 · 빈도 표 <b>(검색 수치 ≠ 방문·선호)</b></div>
+    <div class="toolbar">
+      <select id="searchCls" aria-label="분류명"></select>
+      <div class="seg" id="searchView"><button data-v="cloud" class="on">워드클라우드</button><button data-v="bar">막대그래프</button></div>
+    </div>
+    <div id="searchBox"><div id="searchChart" class="chart"></div></div>
+    <div id="searchWarn"></div>
+    <details open><summary>검색어 빈도 표 (상위 20)</summary><div class="tscroll"><table id="searchTable"></table></div></details>
+    <div class="basis" id="searchBasis"></div>
+  </section>
+
+  <section class="card">
+    <div class="h"><span class="num">9</span><h2>온라인 후기</h2></div>
+    <div class="sub">주요 활동 · 만족 요인 · 불편 사항</div>
+    <div id="reviewBox">
+    <div class="cols3">
+      <div class="box"><h3>주요 활동</h3><div class="na">수집된 후기 데이터 없음</div></div>
+      <div class="box"><h3>만족 요인</h3><div class="na">수집된 후기 데이터 없음</div></div>
+      <div class="box"><h3>불편 사항</h3><div class="na">수집된 후기 데이터 없음</div></div>
+    </div>
+    <div class="warn" style="margin-top:12px"><b>추가 확인 필요</b> — 제공된 data 폴더 7개 파일에 온라인 후기(네이버 블로그·유튜브·지도 리뷰 등) 원문 또는 분석 결과가 없습니다. 근거 없는 요약을 만들지 않기 위해 이 영역은 비워 두었습니다.<br>
+    보완하려면: 출처·수집일·수집 키워드·게시일·(가능하면) 작성자 연령대 정보가 포함된 후기 데이터를 data 폴더에 추가한 뒤 주제 분류 기준을 정해야 합니다.<br>
+    네이버 블로그 검색 결과는 <code>naver_blog/collect.py</code> → <code>build_reviews.py</code> 실행으로 연결할 수 있습니다(README 참고).</div>
+    </div>
+  </section>
+</div>
+
+<!-- 10 요약 -->
+<section class="card tint">
+  <div class="h"><span class="num">10</span><h2>분석 결과 요약</h2></div>
+  <div class="sub">현재 필터 기준으로 자동 계산됩니다. 해석·제안은 검증 전 가설입니다.</div>
+  <div class="cols4">
+    <div class="box"><h3>✔ 확인된 사실</h3><ul id="sumFacts"></ul></div>
+    <div class="box"><h3>💡 해석 및 가설</h3><ul id="sumInterp"></ul></div>
+    <div class="box"><h3>＋ 추가 확인 사항</h3><ul id="sumCheck"></ul></div>
+    <div class="box"><h3>◎ 실행 제안 <span class="tag">(검토용)</span></h3><ul id="sumAction"></ul></div>
+  </div>
+</section>
+
+<!-- 참고 -->
+<section class="card">
+  <div class="h"><span class="num" style="background:#7a869c">+</span><h2>참고: 제주 입도 관광객 (전체, 연령 구분 없음)</h2></div>
+  <div class="sub">와이어프레임 외 참고 영역 — 연령대별·읍면동별 방문객과 <b>집계 기준이 달라 직접 비교 불가</b></div>
+  <div class="grid2" style="margin-top:8px">
+    <div><div id="inboundChart" class="chart short"></div></div>
+    <div><div id="foreignChart" class="chart short"></div></div>
+  </div>
+  <details><summary>월별 입도객 ↔ 일별 입도객 월 합계 대조 표</summary><div class="tscroll"><table id="inboundTable"></table></div></details>
+  <div class="basis" id="refBasis"></div>
+</section>
+
+<div class="foot">원본: dashboard/../data/*.xlsx → build_data.py → data.js · 차트: Apache ECharts 5.5.1 (+ echarts-wordcloud 2.1.0)</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const D = window.DASH_DATA;
+if (!D || typeof echarts === "undefined") {
+  document.querySelector(".wrap").insertAdjacentHTML("afterbegin",
+    '<div class="card warn" style="font-size:14px">data.js 또는 lib/echarts.min.js 를 불러오지 못했습니다. dashboard 폴더 구조를 확인하세요 (README 참고).</div>');
+  return;
+}
+
+/* ---------- 공통 유틸 ---------- */
+const fmt = n => (n == null || isNaN(n)) ? "–" : Math.round(n).toLocaleString("ko-KR");
+const pct = (n, d=1) => (n == null || !isFinite(n)) ? "–" : (n*100).toFixed(d) + "%";
+const ymL = ym => String(ym).slice(0,4) + "-" + String(ym).slice(4);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = id => document.getElementById(id);
+function ymRange(a, b){ const o=[]; let y=Math.floor(a/100), m=a%100; while (y*100+m <= b){ o.push(y*100+m); if(++m>12){m=1;y++;} } return o; }
+const YEAR_COLOR = {2024:"#2a78d6", 2025:"#eb6834", 2026:"#1baf7a"};
+const SEQ = ["#cde2fb","#86b6ef","#3987e5","#256abf","#104281"];
+const AXIS = {axisLine:{lineStyle:{color:"#c9d3e3"}}, axisTick:{show:false}, axisLabel:{color:"#4a5873"}, splitLine:{lineStyle:{color:"#edf1f7"}}, nameTextStyle:{color:"#4a5873"}};
+const TIP = {backgroundColor:"#fff", borderColor:"#dbe5f3", textStyle:{color:"#0f1f3d", fontSize:12}, confine:true};
+
+const AGE_MONTHS = [...new Set(D.age.map(r=>r[0]))].sort();
+const REGION_MONTHS = [...new Set(D.region.map(r=>r[0]))].sort();
+const MONTHLY_MONTHS = D.monthly.map(r=>r[0]);
+const ALL_MONTHS = ymRange(Math.min(AGE_MONTHS[0], D.place.months[0], D.search.months[0]),
+                           Math.max(AGE_MONTHS.at(-1), D.place.months.at(-1), D.search.months.at(-1)));
+const EMD2SGG = Object.fromEntries(D.emd.map(([s,e])=>[e,s]));
+const DEFAULT = {start:202401, end:AGE_MONTHS.at(-1), age:20, sex:"ALL", sgg:"ALL", emd:"ALL"};
+const S = Object.assign({}, DEFAULT, {regionMetric:5, placeCat:"ALL", placeN:10, searchCls:"ALL", searchView: window.__wc ? "cloud" : "bar"});
+
+function eff(dataMonths){ // 선택 기간 ∩ 데이터 보유 월
+  const set = new Set(dataMonths);
+  return ymRange(S.start, S.end).filter(m => set.has(m));
+}
+function rangeTxt(ms){ return ms.length ? `${ymL(ms[0])} ~ ${ymL(ms.at(-1))} (${ms.length}개월)` : "해당 기간 데이터 없음"; }
+const ageLabel = a => a + "대";
+const sexLabel = s => ({ALL:"성별 전체", M:"남성(M)", W:"여성(W)"})[s];
+
+const charts = {};
+function chart(id){
+  if (!charts[id]) charts[id] = echarts.init($(id), null, {renderer:"canvas"});
+  return charts[id];
+}
+function noData(boxId, msg){
+  const box = $(boxId);
+  box.querySelectorAll(".chart").forEach(c => { if (charts[c.id]) { charts[c.id].dispose(); delete charts[c.id]; } });
+  box.dataset.na = "1";
+  box.innerHTML = `<div class="na">${msg}</div>`;
+}
+function ensureBox(boxId, html){
+  const box = $(boxId);
+  if (box.dataset.na === "1") { box.innerHTML = html; delete box.dataset.na; }
+}
+let rT; window.addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(() => Object.values(charts).forEach(c => c.resize()), 100); });
+
+/* ---------- 헤더: 데이터 기준 표 ---------- */
+(function meta(){
+  const M = D.meta;
+  const rows = [
+    ["제주 연령대별 방문", "기준연월(int), 시도코드, 시도명, 성별(M/W), 연령(10~70), 방문객수(int)", `${ymL(M.age.min)} ~ ${ymL(M.age.max)} 월별`, "명", `제주 전체 1개 지역 × 성별 2 × 연령 7 (${M.age.rows}행). 월 합계가 입도객의 약 4배 → 산출 기준(도민 포함·중복 집계 여부) <b>추가 확인 필요</b>. 연령 '10','70'의 구간 정의도 확인 필요`, "3·4·5, 10"],
+    ["제주 지역별 방문객(읍면동)", "기준연월, 읍면동코드, 시도명, 시군구명, 읍면동명, 내국인/외국인/총 방문객수, 주민센터 주소 (+주소목록 시트)", `${ymL(M.region.min)} ~ ${ymL(M.region.max)} 월별`, "명", `43개 읍면동 × 월 (${M.region.rows}행). 연령 구분 없음. 43개 합계가 입도객의 약 11~13배 → 여러 읍면동 방문 시 중복 집계로 추정(추가 확인 필요)`, "6"],
+    ["제주 지역별 인기 장소", "주행일자(YYYYMM), 목적지명, 목적지주소, 읍면동코드, 읍면동명, 도착건수, 카테고리 3단계, 관광객 도착 수, 도민 도착 수", `${ymL(M.place.min)} ~ ${ymL(M.place.max)} 월별`, "건(도착 수)", `장소 × 월 (${fmt(M.place.rows)}행), 카테고리 ${M.place.cats}종(아파트·의원 등 비관광 시설 포함). 연령 구분 없음. 대시보드에는 전체 기간 관광객 도착 수 ≥ ${D.place.min} 인 장소 ${fmt(M.place.kept)}개(전체 도착 수의 ${M.place.keptShare}%)만 탑재`, "7"],
+    ["비짓제주 검색어 순위", "기준년월, 분류명(5종), 지역명(=장소명), 주소, 수치", `${ymL(M.search.min)} ~ ${ymL(M.search.max)} 월별`, "단위 미상(수치)", `${fmt(M.search.rows)}행. 동일 (기준년월·분류명·지역명·주소)에 최대 7행이 있으나 구분 컬럼 없음 → <b>삭제하지 않고 합산</b>, 의미는 추가 확인 필요. 연령 구분 없음`, "8"],
+    ["월별 입도 관광객", "기준연월, 내국인/외국인/전체 입도 관광객수", `${ymL(MONTHLY_MONTHS[0])} ~ ${ymL(MONTHLY_MONTHS.at(-1))} 월별`, "명", "제주 입도 기준, 연령 구분 없음", "참고"],
+    ["입도 관광객 추이(일별)", "기준일자(YYYYMMDD), 내국인/외국인/전체 방문객수", `${M.daily.min} ~ ${M.daily.max} 일별`, "명", `${M.daily.rows}행. 월 합계가 월별 파일과 1~4% 차이 → 대조 표로 제시`, "참고"],
+    ["월간 국가별 외국인 입도객", "기준연월, 관광구분별카테고리(국가), 입도객수(명)", `${ymL(D.foreign.at(-1)[0])} ~ ${ymL(D.foreign[0][0])} 월별`, "명", "11개 분류, '기타'가 월마다 2행(구분 정보 없음)", "참고"],
+  ];
+  $("metaTable").innerHTML = "<tr><th>파일</th><th>컬럼(자료형)</th><th>기간</th><th>단위</th><th>집계 기준 · 유의 사항</th><th>사용 영역</th></tr>" +
+    rows.map(r => `<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("");
+})();
+
+/* ---------- 필터 구성 (데이터에 존재하는 값만) ---------- */
+function opt(sel, items, val){ sel.innerHTML = items.map(([v,t]) => `<option value="${esc(v)}"${String(v)===String(val)?" selected":""}>${esc(t)}</option>`).join(""); }
+function buildFilters(){
+  opt($("fStart"), ALL_MONTHS.map(m=>[m, ymL(m)]), S.start);
+  opt($("fEnd"), ALL_MONTHS.map(m=>[m, ymL(m)]), S.end);
+  opt($("fAge"), D.meta.age.ages.map(a=>[a, ageLabel(a) + (a===10?" (원본 값 10)":a===70?" (원본 값 70)":"")]), S.age);
+  opt($("fSex"), [["ALL","전체"]].concat(D.meta.age.sex.map(s=>[s, s==="M"?"남성 (M)":"여성 (W)"])), S.sex);
+  const sggs = [...new Set(D.emd.map(r=>r[0]))];
+  opt($("fSgg"), [["ALL","전체 지역"]].concat(sggs.map(s=>[s,s])), S.sgg);
+  const emds = D.emd.filter(r => S.sgg==="ALL" || r[0]===S.sgg).map(r=>[r[1], (S.sgg==="ALL"? r[0]+" ":"") + r[1]]);
+  opt($("fEmd"), [["ALL","전체 읍면동"]].concat(emds), S.emd);
+  const cats = D.place.cats;
+  opt($("placeCat"), [["ALL","카테고리 전체 ("+cats.length+"종)"]].concat(cats.map(([c])=>[c, c])), S.placeCat);
+  const cls = [...new Set(D.search.ids.map(r=>r[0]))];
+  opt($("searchCls"), [["ALL","분류 전체"]].concat(cls.map(c=>[c,c])), S.searchCls);
+}
+function bind(){
+  $("fStart").onchange = e => { S.start=+e.target.value; if (S.start > S.end) S.end = S.start; refresh(); };
+  $("fEnd").onchange = e => { S.end=+e.target.value; if (S.end < S.start) S.start = S.end; refresh(); };
+  $("fAge").onchange = e => { S.age=+e.target.value; refresh(); };
+  $("fSex").onchange = e => { S.sex=e.target.value; refresh(); };
+  $("fSgg").onchange = e => { S.sgg=e.target.value; S.emd="ALL"; refresh(); };
+  $("fEmd").onchange = e => { S.emd=e.target.value; if (S.emd!=="ALL") S.sgg = EMD2SGG[S.emd]; refresh(); };
+  $("placeCat").onchange = e => { S.placeCat=e.target.value; renderPlace(); renderSummary(); };
+  $("placeN").onchange = e => { S.placeN=+e.target.value; renderPlace(); };
+  $("searchCls").onchange = e => { S.searchCls=e.target.value; renderSearch(); renderSummary(); };
+  $("btnReset").onclick = () => { Object.assign(S, DEFAULT, {placeCat:"ALL", searchCls:"ALL"}); refresh(); };
+  segBind("regionMetric", v => { S.regionMetric=+v; renderRegion(); renderSummary(); });
+  segBind("searchView", v => {
+    if (v==="cloud" && !window.__wc) { alert("워드클라우드 라이브러리를 불러오지 못해 막대그래프로 대체합니다."); return; }
+    S.searchView=v; renderSearch();
+  });
+}
+function segBind(id, fn){
+  const el = $(id);
+  el.querySelectorAll("button").forEach(b => b.onclick = () => {
+    el.querySelectorAll("button").forEach(x=>x.classList.toggle("on", x===b)); fn(b.dataset.v);
+  });
+}
+function syncSeg(id, v){ $(id).querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.v===String(v))); }
+
+/* ---------- 연령 데이터 계산 ---------- */
+const AGE_IDX = {};
+D.age.forEach(([ym, sex, age, v]) => { (AGE_IDX[ym] ||= {}); AGE_IDX[ym][sex+"|"+age] = v; });
+function ageVal(ym, age, sex){
+  const r = AGE_IDX[ym]; if (!r) return null;
+  const sexes = sex==="ALL" ? D.meta.age.sex : [sex];
+  const ages = age==="ALL" ? D.meta.age.ages : [age];
+  let s = 0, hit = false;
+  sexes.forEach(x => ages.forEach(a => { const v = r[x+"|"+a]; if (v != null) { s += v; hit = true; } }));
+  return hit ? s : null;
+}
+let CALC = {};
+
+function renderKPI(){
+  const ms = eff(AGE_MONTHS);
+  const lbl = `${ageLabel(S.age)}`;
+  $("k1Title").textContent = `(${lbl} 방문 규모)`;
+  const basis = `<b>데이터</b>: 제주 연령대별 방문 · <b>적용 기간</b>: ${rangeTxt(ms)} · <b>조건</b>: ${lbl}, ${sexLabel(S.sex)} · 지역 필터 미적용(원본이 제주 전체 단일 지역)`;
+  $("k1Basis").innerHTML = basis; $("k2Basis").innerHTML = basis;
+  if (!ms.length){
+    $("k1Val").textContent = "데이터 없음"; $("k1Cap").textContent = `선택 기간에 연령 데이터가 없습니다 (보유: ${ymL(AGE_MONTHS[0])}~${ymL(AGE_MONTHS.at(-1))})`; $("k1Sec").textContent="";
+    $("k2Val").textContent = "계산 불가"; $("k2Cap").textContent = "선택 기간에 연령 데이터가 없습니다"; $("k2Sec").textContent=""; $("k2Icon").innerHTML="";
+    CALC.age = null; return;
+  }
+  const tot = ms.reduce((s,m)=>s+ageVal(m, S.age, S.sex), 0);
+  const all = ms.reduce((s,m)=>s+ageVal(m, "ALL", S.sex), 0);
+  const ranks = D.meta.age.ages.map(a => [a, ms.reduce((s,m)=>s+ageVal(m, a, S.sex), 0)]).sort((x,y)=>y[1]-x[1]);
+  const rank = ranks.findIndex(r=>r[0]===S.age) + 1;
+  $("k1Val").textContent = fmt(tot) + "명";
+  $("k1Cap").textContent = `${lbl} 방문객수 합계 (선택 기간 월별 값 합산, ${sexLabel(S.sex)})`;
+  $("k1Sec").innerHTML = `전 연령 대비 비중 <b>${pct(tot/all)}</b> · 7개 연령대 중 ${rank}위 · 월평균 ${fmt(tot/ms.length)}명`;
+
+  // 전년 동월 대비: 기간 마지막 월 vs 전년 동월
+  const last = ms.at(-1), prev = last - 100;
+  const cur = ageVal(last, S.age, S.sex), pv = ageVal(prev, S.age, S.sex);
+  const comp = ms.filter(m => AGE_IDX[m-100]);
+  const cSum = comp.reduce((s,m)=>s+ageVal(m,S.age,S.sex),0), pSum = comp.reduce((s,m)=>s+ageVal(m-100,S.age,S.sex),0);
+  if (pv == null){
+    $("k2Val").textContent = "계산 불가"; $("k2Icon").innerHTML = "";
+    $("k2Cap").textContent = `${ymL(last)}의 전년 동월(${ymL(prev)}) 데이터가 없습니다 (연령 데이터는 ${ymL(AGE_MONTHS[0])}부터)`;
+  } else {
+    const r = cur/pv - 1;
+    $("k2Val").innerHTML = `<span class="${r>=0?"up":"down"}">${r>=0?"+":""}${(r*100).toFixed(1)}%</span>`;
+    $("k2Icon").setAttribute("stroke", r>=0 ? "var(--good)" : "var(--bad)");
+    $("k2Icon").innerHTML = r>=0 ? '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>' : '<path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/>';
+    $("k2Cap").textContent = `${ymL(last)} ${lbl} ${fmt(cur)}명 vs ${ymL(prev)} ${fmt(pv)}명 (기간 마지막 월 기준)`;
+  }
+  $("k2Sec").innerHTML = comp.length
+    ? `기간 누적 비교(전년 동월이 있는 ${comp.length}개월): ${fmt(cSum)} vs ${fmt(pSum)} → <b class="${cSum>=pSum?"up":"down"}">${cSum>=pSum?"+":""}${((cSum/pSum-1)*100).toFixed(1)}%</b>`
+    : "기간 누적 비교: 전년 동월 데이터가 있는 월이 없어 계산 불가";
+  CALC.age = {ms, tot, all, rank, last, yoy: pv==null?null:cur/pv-1, cumYoy: comp.length? cSum/pSum-1 : null, compN: comp.length};
+}
+
+function renderTrend(){
+  const ms = eff(AGE_MONTHS);
+  const lbl = ageLabel(S.age);
+  $("trendSub").textContent = `월별 · 연도별 ${lbl} 방문객수 변화 (${sexLabel(S.sex)})`;
+  $("trendBasis").innerHTML = `<b>데이터</b>: 제주 연령대별 방문 · <b>적용 기간</b>: ${rangeTxt(ms)} · 지역 필터 미적용`;
+  if (!ms.length){ noData("trendBox", `선택 기간에 연령대별 방문 데이터가 없습니다. 보유 기간: ${ymL(AGE_MONTHS[0])} ~ ${ymL(AGE_MONTHS.at(-1))}`); $("trendTable").innerHTML=""; CALC.trend=null; return; }
+  ensureBox("trendBox", '<div id="trendChart" class="chart"></div>');
+  const years = [...new Set(ms.map(m=>Math.floor(m/100)))];
+  const set = new Set(ms);
+  const series = years.map(y => ({
+    name: y+"년", type:"line", smooth:false, symbol:"circle", symbolSize:8, connectNulls:false,
+    lineStyle:{width:2, color:YEAR_COLOR[y]}, itemStyle:{color:YEAR_COLOR[y], borderColor:"#fff", borderWidth:2},
+    data: Array.from({length:12}, (_,i) => { const m=y*100+i+1; return set.has(m) ? ageVal(m, S.age, S.sex) : null; }),
+  }));
+  chart("trendChart").setOption({
+    animation:false, color: years.map(y=>YEAR_COLOR[y]),
+    title:{text:`${lbl} 월별 방문객수`, left:0, top:0, textStyle:{fontSize:13, color:"#0f1f3d"}},
+    legend:{right:0, top:22, textStyle:{color:"#4a5873"}},
+    tooltip:Object.assign({trigger:"axis", axisPointer:{type:"line", lineStyle:{color:"#9fb2d0"}}, valueFormatter:v=>v==null?"데이터 없음":fmt(v)+"명"}, TIP),
+    grid:{left:70, right:30, top:60, bottom:46},
+    xAxis:Object.assign({type:"category", name:"월", nameLocation:"middle", nameGap:28, data:Array.from({length:12},(_,i)=>(i+1)+"월"), boundaryGap:false}, AXIS, {splitLine:{show:false}}),
+    yAxis:Object.assign({type:"value", name:"방문객수(명)", nameLocation:"middle", nameGap:56, axisLabel:{color:"#4a5873", formatter:v=>v>=10000? (v/10000).toLocaleString("ko-KR")+"만":v}}, {axisLine:{show:false}, splitLine:AXIS.splitLine, nameTextStyle:AXIS.nameTextStyle}),
+    series
+  }, true);
+  // 표
+  $("trendTable").innerHTML = `<tr><th>월</th>${years.map(y=>`<th class="n">${y}년 (명)</th>`).join("")}<th class="n">전 연령 합계 대비 비중 (마지막 연도)</th></tr>` +
+    Array.from({length:12},(_,i)=>{
+      const ly = years.at(-1)*100+i+1;
+      const share = set.has(ly) ? pct(ageVal(ly,S.age,S.sex)/ageVal(ly,"ALL",S.sex)) : "–";
+      return `<tr><td>${i+1}월</td>${years.map(y=>{const m=y*100+i+1; return `<td class="n">${set.has(m)?fmt(ageVal(m,S.age,S.sex)):"–"}</td>`}).join("")}<td class="n">${share}</td></tr>`;
+    }).join("");
+  const peaks = years.map(y => { let best=null; for (let i=1;i<=12;i++){ const m=y*100+i; if(!set.has(m)) continue; const v=ageVal(m,S.age,S.sex); if(!best||v>best.v) best={m,v}; } return best; }).filter(Boolean);
+  const peakAll = ms.reduce((b,m)=>{const v=ageVal(m,S.age,S.sex); return (!b||v>b.v)?{m,v}:b;}, null);
+  CALC.trend = {peaks, peakAll, years};
+}
+
+/* ---------- 지역 ---------- */
+echarts.registerMap("jeju", D.geo);
+function renderRegion(){
+  syncSeg("regionMetric", S.regionMetric);
+  const ms = eff(REGION_MONTHS), set = new Set(ms);
+  const mName = {3:"내국인 방문객수", 4:"외국인 방문객수", 5:"총 방문객수 (내국인+외국인)"}[S.regionMetric];
+  $("regionBasis").innerHTML = `<b>데이터</b>: 제주 지역별 방문객(읍면동) · <b>지표</b>: ${mName} (선택 기간 월별 값 합산) · <b>적용 기간</b>: ${rangeTxt(ms)} · <b>지도</b>: 원본의 읍면동명 43개를 2013 통계청 읍면동 경계(southkorea-maps)와 이름으로 결합 — 43개 모두 일치 · 지도·비중은 선택한 시군구 범위 기준 · 연령/성별 필터 미적용`;
+  if (!ms.length){ noData("regionBox", `선택 기간에 읍면동 방문객 데이터가 없습니다. 보유 기간: ${ymL(REGION_MONTHS[0])} ~ ${ymL(REGION_MONTHS.at(-1))}`); $("regionTable").innerHTML=""; $("regionSel").innerHTML=""; CALC.region=null; return; }
+  ensureBox("regionBox", '<div id="mapChart" class="chart map"></div><div id="regionBar" class="chart" style="height:330px"></div>');
+  const agg = {};
+  D.region.forEach(r => { if (!set.has(r[0])) return; const a = agg[r[2]] ||= {sgg:r[1], emd:r[2], d:0, f:0, t:0}; a.d+=r[3]; a.f+=r[4]; a.t+=r[5]; });
+  const key = {3:"d",4:"f",5:"t"}[S.regionMetric];
+  const all = Object.values(agg);
+  const scope = all.filter(a => S.sgg==="ALL" || a.sgg===S.sgg).sort((x,y)=>y[key]-x[key]);
+  const sum = scope.reduce((s,a)=>s+a[key],0);
+  const vals = scope.map(a=>a[key]);
+  chart("mapChart").setOption({
+    animation:false,
+    title:{text:`읍면동별 ${mName.split(" (")[0]}`, left:0, top:0, textStyle:{fontSize:13, color:"#0f1f3d"}},
+    tooltip:Object.assign({trigger:"item", formatter:p => {
+      const a = agg[p.name]; if (!a) return esc(p.name);
+      const inScope = S.sgg==="ALL" || a.sgg===S.sgg;
+      return `<b>${esc(a.sgg)} ${esc(p.name)}</b><br>${mName}: ${fmt(a[key])}명` + (inScope ? `<br>비중(${S.sgg==="ALL"?"제주 전체":S.sgg} 합계 대비): ${pct(a[key]/sum)}` : "<br>(선택 시군구 범위 밖)");
+    }}, TIP),
+    visualMap:{type:"continuous", min:Math.min(...vals), max:Math.max(...vals), inRange:{color:SEQ}, left:0, bottom:0, itemHeight:110, itemWidth:12,
+      text:["많음","적음"], textStyle:{color:"#4a5873", fontSize:11}, formatter:v=>fmt(v), calculable:false, seriesIndex:0},
+    series:[{type:"map", map:"jeju", aspectScale:0.84, layoutCenter:["55%","52%"], layoutSize:"96%", roam:false,
+      itemStyle:{borderColor:"#fff", borderWidth:0.8, areaColor:"#eceff4"},
+      emphasis:{label:{show:true, color:"#0f1f3d", fontSize:11}, itemStyle:{areaColor:"#eb6834"}},
+      select:{label:{show:true, color:"#0f1f3d", fontWeight:"bold"}, itemStyle:{areaColor:"#eb6834", borderColor:"#0f1f3d", borderWidth:1.5}},
+      selectedMode:"single",
+      data: scope.map(a=>({name:a.emd, value:a[key], selected: a.emd===S.emd}))
+    }],
+    graphic:[{type:"text", right:0, bottom:0, style:{text:"단위: 명 · 회색 = 선택 범위 밖", fill:"#7a869c", fontSize:11}}]
+  }, true);
+  charts.mapChart.off("click");
+  charts.mapChart.on("click", p => { if (!agg[p.name]) return; S.emd = (S.emd===p.name) ? "ALL" : p.name; if (S.emd!=="ALL") S.sgg = EMD2SGG[S.emd]; refresh(); });
+  const top = scope.slice(0,10).reverse();
+  chart("regionBar").setOption({
+    animation:false,
+    title:{text:`상위 10 읍면동 (${S.sgg==="ALL"?"제주 전체":S.sgg})`, left:0, top:0, textStyle:{fontSize:13, color:"#0f1f3d"}},
+    tooltip:Object.assign({trigger:"item", formatter:p=>`<b>${esc(p.name)}</b><br>${fmt(p.value)}명 · 비중 ${pct(p.value/sum)}`}, TIP),
+    grid:{left:64, right:64, top:30, bottom:40},
+    xAxis:Object.assign({type:"value", name:"방문객 수(명)", nameLocation:"middle", nameGap:26, splitNumber:4, axisLabel:{color:"#4a5873", formatter:v=>v>=10000?(v/10000)+"만":v}}, {splitLine:AXIS.splitLine, axisLine:{show:false}, nameTextStyle:AXIS.nameTextStyle}),
+    yAxis:Object.assign({type:"category", data:top.map(a=>a.emd)}, AXIS),
+    series:[{type:"bar", barMaxWidth:16, data:top.map(a=>({value:a[key], itemStyle:{color: a.emd===S.emd ? "#eb6834" : "#2a78d6", borderRadius:[0,4,4,0]}})),
+      label:{show:true, position:"right", color:"#4a5873", fontSize:11, formatter:p=>pct(p.value/sum)}}]
+  }, true);
+  // 선택 읍면동
+  if (S.emd !== "ALL" && agg[S.emd]){
+    const a = agg[S.emd], rk = scope.findIndex(x=>x.emd===S.emd)+1;
+    $("regionSel").innerHTML = `<div class="warn" style="background:#f3f8ff;border-color:#bcd2f3;color:#1b3d78">선택 읍면동 <b>${esc(a.sgg)} ${esc(a.emd)}</b>: ${mName} ${fmt(a[key])}명 · ${esc(a.sgg)} 내 ${scope.length}개 중 ${rk}위 · 비중 ${pct(a[key]/sum)}</div>`;
+  } else $("regionSel").innerHTML = "";
+  $("regionTable").innerHTML = `<tr><th>시군구</th><th>읍면동</th><th class="n">내국인(명)</th><th class="n">외국인(명)</th><th class="n">총(명)</th><th class="n">선택 지표 비중</th></tr>` +
+    all.sort((x,y)=>y[key]-x[key]).map(a => {
+      const inS = S.sgg==="ALL" || a.sgg===S.sgg;
+      return `<tr style="${a.emd===S.emd?"background:#fff1ea":""}${inS?"":"color:#9aa3b2"}"><td>${esc(a.sgg)}</td><td>${esc(a.emd)}</td><td class="n">${fmt(a.d)}</td><td class="n">${fmt(a.f)}</td><td class="n">${fmt(a.t)}</td><td class="n">${inS?pct(a[key]/sum):"범위 밖"}</td></tr>`;
+    }).join("");
+  CALC.region = {top: scope.slice(0,3), sum, mName, key, ms};
+}
+
+/* ---------- 인기 장소 ---------- */
+function renderPlace(){
+  const P = D.place;
+  const ms = eff(P.months), idx = new Set(ms.map(m=>P.months.indexOf(m)));
+  const scopeTxt = S.emd!=="ALL" ? S.emd : (S.sgg!=="ALL" ? S.sgg : "제주 전체");
+  $("placeBasis").innerHTML = `<b>데이터</b>: 제주 지역별 인기 장소 · <b>지표</b>: 관광객 도착 수 / 도민 도착 수 합계 · <b>적용 기간</b>: ${rangeTxt(ms)} · <b>지역</b>: ${esc(scopeTxt)} (원본 읍면동명 기준) · 장소는 원본의 (목적지명·주소·읍면동·카테고리) 그대로 구분하므로 주소 표기가 다르면 같은 이름도 별도 행 · '주행일자' 컬럼명으로 보아 차량 주행 목적지 도착 기반 집계로 보이나 수집 방식 <b>추가 확인 필요</b> · 연령/성별 필터 미적용`;
+  $("placeWarn").innerHTML = "";
+  if (!ms.length){ noData("placeBox", `선택 기간에 인기 장소 데이터가 없습니다. 보유 기간: ${ymL(P.months[0])} ~ ${ymL(P.months.at(-1))}`); CALC.place=null; return; }
+  ensureBox("placeBox", '<div class="tscroll" style="max-height:470px"><table id="placeTable"></table></div>');
+  const rows = [];
+  for (let i=0;i<P.ids.length;i++){
+    const [name, addr, emd, cat] = P.ids[i];
+    if (S.placeCat!=="ALL" && cat!==S.placeCat) continue;
+    if (S.emd!=="ALL" ? emd!==S.emd : (S.sgg!=="ALL" && EMD2SGG[emd]!==S.sgg)) continue;
+    const c = P.cells[i]; let t=0, r=0, hit=false;
+    for (let j=0;j<c.length;j+=3) if (idx.has(c[j])) { t+=c[j+1]; r+=c[j+2]; hit=true; }
+    if (hit) rows.push({name, addr, emd, cat, t, r});
+  }
+  rows.sort((a,b)=>b.t-a.t || b.r-a.r);
+  const top = rows.slice(0, S.placeN);
+  if (!top.length || top[0].t === 0){
+    $("placeTable").innerHTML = `<tr><td><div class="na">이 조건(기간·지역·카테고리)에 해당하는 장소가 대시보드 탑재 범위(전체 기간 관광객 도착 수 ≥ ${P.min})에 없습니다.</div></td></tr>`;
+    CALC.place = null; return;
+  }
+  const max = top[0].t;
+  $("placeTable").innerHTML = `<tr><th class="n">순위</th><th>장소명</th><th>유형(카테고리 3단계)</th><th style="white-space:nowrap">읍면동</th><th class="n">관광객 도착 수</th><th class="n">도민 도착 수</th></tr>` +
+    top.map((p,i)=>`<tr><td class="n">${i+1}${p.t<P.min?"†":""}</td><td title="${esc(p.addr)}">${esc(p.name)}<div style="font-size:11px;color:#7a869c">${esc(p.addr)}</div></td><td><span class="badge">${esc(p.cat)}</span></td><td style="white-space:nowrap">${esc(p.emd)}</td>
+      <td class="n"><div class="cellbar">${fmt(p.t)}<i style="width:${Math.max(2,p.t/max*70)}px"></i></div></td><td class="n">${fmt(p.r)}</td></tr>`).join("");
+  const low = top.some(p=>p.t<P.min);
+  if (low) $("placeWarn").innerHTML = `<div class="warn">† 표시 순위는 값이 ${P.min} 미만입니다. 대시보드에는 전체 기간 관광객 도착 수 ${P.min} 이상인 장소만 실려 있어, † 순위 사이에 생략된 장소가 있을 수 있습니다(원본 전체 재집계 필요).</div>`;
+  if (top.length < S.placeN) $("placeWarn").innerHTML += `<div class="warn">조건에 맞는 탑재 장소가 ${top.length}개뿐입니다.</div>`;
+  CALC.place = {top: top.slice(0,5), ms, scopeTxt};
+}
+
+/* ---------- 검색어 ---------- */
+function renderSearch(){
+  syncSeg("searchView", S.searchView);
+  const Q = D.search;
+  const ms = eff(Q.months), idx = new Set(ms.map(m=>Q.months.indexOf(m)));
+  const sggScope = S.sgg;
+  $("searchWarn").innerHTML = "";
+  $("searchBasis").innerHTML = `<b>데이터</b>: 비짓제주 검색어 순위 · <b>지표</b>: '수치' 합계(단위 미상) — 동일 (기준년월·분류명·지역명·주소)에 최대 7행이 있어 모두 합산, 같은 지역명의 여러 주소도 이름 기준으로 합산 · <b>적용 기간</b>: ${rangeTxt(ms)} · <b>지역</b>: 주소의 시군구 기준(${sggScope==="ALL"?"전체":esc(sggScope)}) · <b>워드클라우드</b>: 상위 80개 지역명, 글자 크기 = 수치 합계 · 연령/성별 필터 미적용(연령 구분 없음)`;
+  if (S.emd !== "ALL") $("searchWarn").innerHTML = `<div class="warn">검색어 주소에는 '동' 정보가 없는 경우가 많아 읍면동이 아닌 <b>${esc(sggScope)}</b> 단위로 적용했습니다.</div>`;
+  if (!ms.length){ noData("searchBox", `선택 기간에 검색어 데이터가 없습니다. 보유 기간: ${ymL(Q.months[0])} ~ ${ymL(Q.months.at(-1))}`); $("searchTable").innerHTML=""; CALC.search=null; return; }
+  ensureBox("searchBox", '<div id="searchChart" class="chart"></div>');
+  const byName = new Map(); let total = 0, unknownSgg = 0;
+  for (let i=0;i<Q.ids.length;i++){
+    const [cls, name, addr, sgg] = Q.ids[i];
+    if (S.searchCls!=="ALL" && cls!==S.searchCls) continue;
+    const c = Q.cells[i]; let v=0;
+    for (let j=0;j<c.length;j+=2) if (idx.has(c[j])) v+=c[j+1];
+    if (!v) continue;
+    if (sggScope!=="ALL" && sgg!==sggScope){ if (sgg==="미상") unknownSgg+=v; continue; }
+    total += v;
+    const o = byName.get(name) || {name, v:0, cls:new Set(), addr:new Set()};
+    o.v += v; o.cls.add(cls); o.addr.add(addr); byName.set(name, o);
+  }
+  const list = [...byName.values()].sort((a,b)=>b.v-a.v);
+  if (!list.length){ noData("searchBox", "이 조건에 해당하는 검색어가 없습니다."); $("searchTable").innerHTML=""; CALC.search=null; return; }
+  if (unknownSgg) $("searchWarn").innerHTML += `<div class="warn">주소에서 시군구를 판별할 수 없는 항목(수치 ${fmt(unknownSgg)})은 시군구 필터 적용 시 제외됩니다.</div>`;
+  const c = chart("searchChart");
+  if (S.searchView==="cloud" && window.__wc){
+    const w = list.slice(0,80), mx = w[0].v, mn = w.at(-1).v;
+    c.setOption({
+      animation:false,
+      title:{text:"검색어 워드클라우드 (글자 크기 = 수치 합계)", left:0, top:0, textStyle:{fontSize:13, color:"#0f1f3d"}},
+      tooltip:Object.assign({formatter:p=>`<b>${esc(p.name)}</b><br>수치 합계: ${fmt(p.value)}<br>비중: ${pct(p.value/total)}`}, TIP),
+      series:[{type:"wordCloud", shape:"circle", left:"center", top:28, width:"100%", height:"88%", sizeRange:[11,46], rotationRange:[0,0], gridSize:5, drawOutOfBound:false, layoutAnimation:false,
+        textStyle:{fontWeight:"bold", color:p=>{const t=(p.value-mn)/((mx-mn)||1); return t>.6?"#104281":t>.3?"#1c5cab":t>.12?"#2a78d6":"#5598e7";}},
+        data:w.map(o=>({name:o.name, value:o.v}))}]
+    }, true);
+  } else {
+    const t = list.slice(0,15).reverse();
+    c.setOption({
+      animation:false,
+      title:{text:"검색어 수치 상위 15", left:0, top:0, textStyle:{fontSize:13, color:"#0f1f3d"}},
+      tooltip:Object.assign({formatter:p=>`<b>${esc(p.name)}</b><br>수치 합계: ${fmt(p.value)} · 비중 ${pct(p.value/total)}`}, TIP),
+      grid:{left:130, right:50, top:28, bottom:40},
+      xAxis:Object.assign({type:"value", name:"수치 합계(단위 미상)", nameLocation:"middle", nameGap:26}, {splitLine:AXIS.splitLine, axisLine:{show:false}, axisLabel:AXIS.axisLabel, nameTextStyle:AXIS.nameTextStyle}),
+      yAxis:Object.assign({type:"category", data:t.map(o=>o.name), axisLabel:{color:"#4a5873", width:120, overflow:"truncate"}}, {axisLine:AXIS.axisLine, axisTick:{show:false}}),
+      series:[{type:"bar", barMaxWidth:14, itemStyle:{color:"#2a78d6", borderRadius:[0,4,4,0]}, data:t.map(o=>o.v),
+        label:{show:true, position:"right", color:"#4a5873", fontSize:11, formatter:p=>fmt(p.value)}}]
+    }, true);
+  }
+  $("searchTable").innerHTML = `<tr><th class="n">순위</th><th>검색어(지역명)</th><th>분류명</th><th class="n">주소 수</th><th class="n">수치 합계</th><th class="n">비중</th></tr>` +
+    list.slice(0,20).map((o,i)=>`<tr><td class="n">${i+1}</td><td>${esc(o.name)}</td><td>${[...o.cls].map(x=>`<span class="badge gray">${esc(x)}</span>`).join(" ")}</td><td class="n">${o.addr.size}</td><td class="n">${fmt(o.v)}</td><td class="n">${pct(o.v/total)}</td></tr>`).join("");
+  const top20 = list.slice(0,20);
+  CALC.search = {top: list.slice(0,5), total, ms, tourCnt: top20.filter(o=>o.cls.has("관광지")).length, n20: top20.length};
+}
+
+/* ---------- 온라인 후기 (네이버 블로그 검색 결과, reviews.js가 있을 때만) ---------- */
+const RV = window.REVIEW_DATA;
+const RVS = {noAd:true, youth:true, jeju:true, open:null};
+function renderReview(){
+  if (!RV) { CALC.review = null; return; }
+  const from = String(S.start), to = String(S.end);
+  const inRange = RV.posts.filter(p => { const m = p.date.slice(0,6); return m >= from && m <= to; });
+  const adN = inRange.filter(p=>p.ad).length;
+  const yN = inRange.filter(p=>p.y).length;
+  const jN = inRange.filter(p=>p.j).length;
+  const posts = inRange.filter(p => !(RVS.noAd && p.ad) && !(RVS.youth && !p.y) && !(RVS.jeju && !p.j));
+  const n = posts.length;
+  const groups = {};
+  Object.entries(RV.meta.groups).forEach(([g, ts]) => {
+    groups[g] = Object.keys(ts).map(t => ({t, n: posts.filter(p=>p.tags.includes(g+"|"+t)).length})).sort((a,b)=>b.n-a.n);
+  });
+  const runs = RV.meta.runs;
+  const box = (g) => {
+    const list = groups[g], mx = Math.max(1, ...list.map(x=>x.n));
+    const few = n && mx < 10 ? `<div class="warn" style="margin:0 0 6px">언급이 최대 ${list[0].n}건뿐이라 경향으로 해석하기 어렵습니다. 요약문(1~2문장)에는 이 주제가 잘 드러나지 않습니다.</div>` : "";
+    return `<div class="box"><h3>${esc(g)}</h3>${few}` + (n ? `<table>${list.map(x=>`<tr data-tag="${esc(g+"|"+x.t)}" style="cursor:pointer${RVS.open===g+"|"+x.t?";background:#fff1ea":""}">
+      <td style="padding:5px 4px;white-space:nowrap">${esc(x.t)}</td><td class="n" style="padding:5px 4px;white-space:nowrap;font-size:12px">${x.n}건 (${pct(x.n/n,0)})</td></tr>`).join("")}</table>` : `<div class="na">이 기간에 게시된 글 없음</div>`) + `</div>`;
+  };
+  let ex = "";
+  if (RVS.open){
+    const [g, t] = RVS.open.split("|");
+    const hits = posts.filter(p=>p.tags.includes(RVS.open));
+    const kws = RV.meta.groups[g][t];
+    const mark = s => esc(s).replace(new RegExp("(" + kws.map(k=>esc(k).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|") + ")", "g"), "<mark>$1</mark>");
+    ex = `<div class="box" style="margin-top:12px"><h3>근거 글: ${esc(g)} › ${esc(t)} (${hits.length}건 중 최신 8건)</h3><div class="tag">매칭 키워드: ${kws.map(esc).join(", ")}</div><ul>` +
+      hits.slice(0,8).map(p=>`<li><a href="${esc(p.link)}" target="_blank" rel="noopener">${mark(p.t)}</a> <span class="tag">${p.date.slice(0,4)}-${p.date.slice(4,6)}-${p.date.slice(6)}${p.ad?" · 광고성 표시":""}</span><br>${mark(p.d)}</li>`).join("") + `</ul></div>`;
+  }
+  $("reviewBox").innerHTML = `
+    <div class="toolbar"><label style="font-size:13px;display:flex;gap:6px;align-items:center;width:auto"><input type="checkbox" id="rvNoAd" ${RVS.noAd?"checked":""} style="width:auto"> 광고성 표시 글 제외 (${adN}건)</label>
+      <label style="font-size:13px;display:flex;gap:6px;align-items:center;width:auto" title="${esc((RV.meta.youthWords||[]).join(', '))}"><input type="checkbox" id="rvYouth" ${RVS.youth?"checked":""} style="width:auto"> 20대 관련 단어가 있는 글만 (${yN}건)</label>
+      <label style="font-size:13px;display:flex;gap:6px;align-items:center;width:auto"><input type="checkbox" id="rvJeju" ${RVS.jeju?"checked":""} style="width:auto"> '제주'가 있는 글만 (${jN}건)</label>
+      <span class="fnote" style="margin:0">항목을 클릭하면 근거 글을 볼 수 있습니다</span></div>
+    <div class="cols3">${["주요 활동","만족 요인","불편 사항"].map(box).join("")}</div>${ex}
+    <details><summary>수집 내역 (검색어별)</summary><div class="tscroll"><table><tr><th>수집 시각</th><th>검색어</th><th>정렬</th><th class="n">검색 결과 총계</th><th class="n">수집</th></tr>${runs.map(r=>`<tr><td>${esc(r.collected_at)}</td><td>${esc(r.query)}</td><td>${r.sort==="date"?"최신순":"정확도순"}</td><td class="n">${fmt(r.api_total)}</td><td class="n">${fmt(r.fetched)}</td></tr>`).join("")}</table></div></details>
+    <div class="basis" style="margin-left:0"><b>데이터</b>: 네이버 검색 API(블로그) 제목·요약문, 고유 게시글 ${fmt(RV.meta.unique)}건 중 게시일이 ${rangeTxt(ymRange(S.start,S.end))}에 해당하는 ${fmt(inRange.length)}건 중 ${[RVS.noAd?"광고성 제외":"", RVS.youth?"20대 관련 단어("+esc((RV.meta.youthWords||[]).join("·"))+") 포함":"", RVS.jeju?"'제주' 포함":""].filter(Boolean).join(", ")||"전체"} → <b>${fmt(n)}건</b> · 검색어 '20대'가 '20개월' 등으로 분리 매칭되므로 20대 관련 단어 필터 권장, 단 '20대 때 왔던'(회상)·뉴스 기사도 포함될 수 있음 · <b>집계</b>: topics.json 키워드가 제목+요약문에 있으면 '언급'으로 셈(한 글이 여러 주제에 중복 집계, 감성 분석 아님) · <b>작성자 연령 미확인</b> · 지역 필터 미적용</div>`;
+  $("rvNoAd").onchange = e => { RVS.noAd = e.target.checked; renderReview(); renderSummary(); };
+  $("rvYouth").onchange = e => { RVS.youth = e.target.checked; renderReview(); renderSummary(); };
+  $("rvJeju").onchange = e => { RVS.jeju = e.target.checked; renderReview(); renderSummary(); };
+  $("reviewBox").querySelectorAll("tr[data-tag]").forEach(tr => tr.onclick = () => { RVS.open = RVS.open===tr.dataset.tag ? null : tr.dataset.tag; renderReview(); });
+  CALC.review = {n, groups};
+}
+
+/* ---------- 요약 ---------- */
+function li(arr){ return arr.length ? arr.map(x=>`<li>${x}</li>`).join("") : "<li>현재 필터에서 계산할 수 있는 항목이 없습니다.</li>"; }
+function renderSummary(){
+  const F=[], I=[], C=[], A=[];
+  const lbl = ageLabel(S.age);
+  const a = CALC.age, t = CALC.trend, r = CALC.region, p = CALC.place, s = CALC.search;
+  if (a){
+    F.push(`${lbl}(${sexLabel(S.sex)}) 방문객수 합계 ${fmt(a.tot)}명, 전 연령 중 비중 ${pct(a.tot/a.all)} (7개 연령대 중 ${a.rank}위) — ${rangeTxt(a.ms)}`);
+    F.push(a.yoy==null ? `${ymL(a.last)} 전년 동월 대비 증감률: 전년 데이터가 없어 계산 불가` : `${ymL(a.last)} ${lbl} 방문객수 전년 동월 대비 ${a.yoy>=0?"+":""}${(a.yoy*100).toFixed(1)}%`);
+  } else F.push("선택 기간에 연령대별 방문 데이터 없음");
+  if (t && t.peaks.length){
+    F.push(`연도별 ${lbl} 최대 방문 월: ${t.peaks.map(x=>ymL(x.m)).join(", ")}`);
+    const months = t.peaks.map(x=>x.m%100);
+    const fullYears = t.peaks.length;
+    if (fullYears>=2 && months.every(m=>m===7||m===8)) I.push(`연도마다 7–8월에 ${lbl} 방문이 가장 많아 여름 성수기 계절성이 반복되는 것으로 보입니다(연령 데이터 기준). 원인(휴가철·축제 등)은 이 데이터로 확인되지 않습니다.`);
+    else I.push(`${lbl} 최대 방문 월이 ${[...new Set(months)].map(m=>m+"월").join("·")}에 나타납니다. 데이터가 일부 월만 포함된 연도는 비교에 주의가 필요합니다.`);
+  }
+  if (a && a.yoy!=null) I.push(`전년 동월 대비 ${a.yoy>=0?"증가":"감소"}가 관측되나, 연령 데이터의 '방문객수' 산출 기준이 불명확해 실제 방문 인원 변화로 단정하기 어렵습니다.`);
+  if (r) F.push(`${r.mName.split(" (")[0]} 상위 읍면동(전체 방문객): ${r.top.map(x=>`${esc(x.emd)} ${pct(x[r.key]/r.sum)}`).join(", ")}`);
+  if (p) F.push(`관광객 도착 수 상위 장소(${esc(p.scopeTxt)}${S.placeCat!=="ALL"?", "+esc(S.placeCat):""}): ${p.top.slice(0,3).map(x=>`${esc(x.name)}(${esc(x.cat)}) ${fmt(x.t)}`).join(", ")}`);
+  if (p) I.push("장소 도착 수 상위에는 관광지 외 공항·시장·숙박·교통 시설 등 이동 거점이 함께 나타날 수 있어 '관광 매력도'로 바로 해석하기 어렵습니다(카테고리 필터로 구분 확인).");
+  if (s){
+    F.push(`검색어 수치 상위: ${s.top.slice(0,3).map(x=>esc(x.name)).join(", ")} (상위 20개 중 '관광지' 분류 포함 ${s.tourCnt}개)`);
+    I.push("검색어 수치는 정보 탐색 관심을 보여 줄 수는 있지만 실제 방문이나 선호를 의미하지 않으며, 연령 구분이 없어 20대 관심사로 해석할 수 없습니다.");
+  }
+  C.push("연령 데이터 '방문객수'의 산출 기준 — 월 합계(약 330만~540만)가 월별 입도객(약 83만~135만)보다 커서 도민 포함·중복 집계 여부 확인 필요");
+  C.push("연령 값 '10'·'70'의 구간 정의(10대 미만·70대 이상 포함 여부)");
+  C.push("지역·장소·검색어 데이터에는 연령 구분이 없어 20대 고유의 지역·장소·검색 특성은 확인 불가");
+  C.push("비짓제주 검색어: 같은 키에 최대 7행이 존재하는 이유(구분 컬럼 없음)와 '수치'의 단위");
+  const rv = CALC.review;
+  if (rv && rv.n){
+    const top = g => rv.groups[g].filter(x=>x.n).slice(0,2).map(x=>`${esc(x.t)} ${x.n}건`).join(", ") || "언급 없음";
+    F.push(`네이버 블로그 검색 결과 ${fmt(rv.n)}건(제목+요약문 키워드 기준) — 활동: ${top("주요 활동")} / 만족: ${top("만족 요인")} / 불편: ${top("불편 사항")}`);
+    I.push("블로그 언급 빈도는 글쓴이들의 관심 주제를 보여 줄 뿐 만족도나 실제 경험 비율이 아니며, 키워드 매칭이라 부정문 등 문맥은 반영되지 않습니다.");
+    C.push("블로그 글 작성자의 연령은 확인할 수 없음(검색어로만 20대 관련 글을 좁힘) · 요약문에 드러나지 않는 광고 글은 걸러지지 않음");
+  } else C.push("온라인 후기 데이터 미제공 → 주요 활동·만족·불편 요인은 수집 후 확인");
+  C.push("와이어프레임의 분석 기간(2023-01~2024-12)과 달리 실제 데이터는 2024-01부터 존재 → 2023년 비교 불가");
+  C.push("인기 장소 목적지명 일부가 엑셀에서 시간·날짜·숫자로 변환된 흔적(예: '11:11:00') — 원문 확인 필요");
+  if (t && t.peaks.length){
+    const pm = [...new Set(t.peaks.map(x=>x.m%100))];
+    A.push(`${lbl} 방문이 가장 많은 ${pm.map(m=>m+"월").join("·")} 이전에 청년 대상 콘텐츠 배포 일정을 잡는 방안 검토`);
+  }
+  if (s && p) A.push(`검색 상위 장소(${s.top.slice(0,3).map(x=>esc(x.name)).join(", ")})와 도착 상위 장소를 함께 살펴 코스형 콘텐츠 후보를 고르되, 20대 선호 여부는 후기·설문으로 검증`);
+  if (r) A.push(`방문 비중이 높은 읍면동(${r.top.slice(0,2).map(x=>esc(x.emd)).join(", ")})의 혼잡 여부를 확인한 뒤 분산형 코스 기획 검토`);
+  if (rv && rv.n){
+    const c = rv.groups["불편 사항"].find(x=>x.n>=10);
+    if (c) A.push(`블로그에서 많이 언급된 불편 주제(${esc(c.t)})의 실제 글을 확인해 콘텐츠에 대응 정보(예: 대안·팁)를 담을지 검토`);
+    else A.push("블로그 요약문만으로는 불편 사항이 드러나지 않으므로, 불편 요인은 지도 리뷰·설문 등 다른 자료로 확인");
+  } else A.push("온라인 후기(블로그·유튜브·지도 리뷰) 수집 체계를 마련해 9번 영역을 근거 기반으로 보완");
+  $("sumFacts").innerHTML = li(F); $("sumInterp").innerHTML = li(I); $("sumCheck").innerHTML = li(C); $("sumAction").innerHTML = li(A);
+}
+
+/* ---------- 참고: 입도객 ---------- */
+function renderRef(){
+  const ms = eff(MONTHLY_MONTHS), set = new Set(ms);
+  $("refBasis").innerHTML = `<b>데이터</b>: 월별 입도 관광객, 월간 국가별 외국인 입도객, 입도 관광객 추이(일별) · <b>적용 기간</b>: ${rangeTxt(ms)} · 지역/연령/성별 필터 미적용 · 국가별 '기타'는 월마다 원본 2행(구분 정보 없음)을 합산 표시 — 추가 확인 필요`;
+  if (!ms.length){
+    ["inboundChart","foreignChart"].forEach(id=>{ if(charts[id]){charts[id].clear(); charts[id].setOption({title:{text:"선택 기간에 입도객 데이터가 없습니다", left:"center", top:"middle", textStyle:{fontSize:13,color:"#7a869c",fontWeight:"normal"}}}); }});
+    $("inboundTable").innerHTML=""; return;
+  }
+  const rows = D.monthly.filter(r=>set.has(r[0]));
+  chart("inboundChart").setOption({
+    animation:false, color:["#2a78d6","#eb6834"],
+    title:{text:"월별 입도 관광객 수", left:0, top:0, textStyle:{fontSize:13,color:"#0f1f3d"}},
+    legend:{right:0, top:0, textStyle:{color:"#4a5873"}},
+    tooltip:Object.assign({trigger:"axis", valueFormatter:v=>fmt(v)+"명"}, TIP),
+    grid:{left:64, right:20, top:40, bottom:48},
+    xAxis:Object.assign({type:"category", name:"기준연월", nameLocation:"middle", nameGap:30, data:rows.map(r=>ymL(r[0]))}, AXIS, {splitLine:{show:false}}),
+    yAxis:Object.assign({type:"value", name:"입도객(명)", nameLocation:"middle", nameGap:50, axisLabel:{color:"#4a5873", formatter:v=>v>=10000?(v/10000)+"만":v}}, {splitLine:AXIS.splitLine, axisLine:{show:false}, nameTextStyle:AXIS.nameTextStyle}),
+    series:[{name:"내국인", type:"line", symbolSize:6, lineStyle:{width:2}, data:rows.map(r=>r[1])},{name:"외국인", type:"line", symbolSize:6, lineStyle:{width:2}, data:rows.map(r=>r[2])}]
+  }, true);
+  const fc = {};
+  D.foreign.forEach(([ym, c, v]) => { if (set.has(ym)) fc[c] = (fc[c]||0) + v; });
+  const fl = Object.entries(fc).sort((a,b)=>b[1]-a[1]).reverse();
+  const fsum = fl.reduce((s,x)=>s+x[1],0);
+  chart("foreignChart").setOption({
+    animation:false,
+    title:{text:"국가별 외국인 입도객 (기간 합계)", left:0, top:0, textStyle:{fontSize:13,color:"#0f1f3d"}},
+    tooltip:Object.assign({formatter:p=>`<b>${esc(p.name)}</b><br>${fmt(p.value)}명 · ${pct(p.value/fsum)}`}, TIP),
+    grid:{left:96, right:60, top:30, bottom:44},
+    xAxis:Object.assign({type:"value", name:"입도객(명)", nameLocation:"middle", nameGap:26, axisLabel:{color:"#4a5873", formatter:v=>v>=10000?(v/10000)+"만":v}}, {splitLine:AXIS.splitLine, axisLine:{show:false}, nameTextStyle:AXIS.nameTextStyle}),
+    yAxis:Object.assign({type:"category", data:fl.map(x=>x[0]==="기타"?"기타(2행 합산)":x[0])}, AXIS),
+    series:[{type:"bar", barMaxWidth:12, itemStyle:{color:"#2a78d6", borderRadius:[0,4,4,0]}, data:fl.map(x=>x[1]), label:{show:true, position:"right", fontSize:10, color:"#4a5873", formatter:p=>pct(p.value/fsum)}}]
+  }, true);
+  const dmap = Object.fromEntries(D.dailyByMonth.map(r=>[r[0], r]));
+  $("inboundTable").innerHTML = `<tr><th>기준연월</th><th class="n">내국인(명)</th><th class="n">외국인(명)</th><th class="n">전체(명)</th><th class="n">일별 파일 월합(명)</th><th class="n">일수</th><th class="n">차이</th></tr>` +
+    rows.map(r=>{ const d=dmap[r[0]]; return `<tr><td>${ymL(r[0])}</td><td class="n">${fmt(r[1])}</td><td class="n">${fmt(r[2])}</td><td class="n">${fmt(r[3])}</td><td class="n">${d?fmt(d[2]):"–"}</td><td class="n">${d?d[1]:"–"}</td><td class="n">${d?((d[2]/r[3]-1)*100).toFixed(1)+"%":"–"}</td></tr>`; }).join("");
+}
+
+/* ---------- 헤더 기간 / 필터 안내 ---------- */
+function renderHeader(){
+  $("hdrPeriod").innerHTML = `선택 ${ymL(S.start)} ~ ${ymL(S.end)} · 데이터 보유: 연령·읍면동·검색어·월별 입도 ${ymL(AGE_MONTHS[0])}~${ymL(AGE_MONTHS.at(-1))}, 인기 장소 ${ymL(D.place.months[0])}~${ymL(D.place.months.at(-1))}, 일별 입도 ${D.meta.daily.min}~${D.meta.daily.max}`;
+  const notes = [];
+  if (S.sgg!=="ALL" || S.emd!=="ALL") notes.push("지역 필터 → 6·7·8번(검색어는 시군구 단위)에 적용, 3·4·5번(연령 데이터)에는 지역 정보가 없어 미적용");
+  if (S.age!==20 || S.sex!=="ALL") notes.push("연령·성별 필터 → 3·4·5번에만 적용(다른 데이터에는 연령 정보 없음)");
+  if (S.end > AGE_MONTHS.at(-1)) notes.push(`${ymL(S.end)}는 인기 장소 데이터에만 존재`);
+  $("filterNote").textContent = notes.join(" · ") || "기간 필터는 모든 영역에 적용 · 연령·성별은 연령 데이터에만, 지역은 지역 정보가 있는 데이터에만 적용됩니다.";
+}
+
+function refresh(){
+  buildFilters(); renderHeader();
+  renderKPI(); renderTrend(); renderRegion(); renderPlace(); renderSearch(); renderRef(); renderReview(); renderSummary();
+}
+bind(); refresh();
+window.__DASH = {S, CALC, refresh, ageVal}; // 검증용
+})();
+</script>
+</body>
+</html>
